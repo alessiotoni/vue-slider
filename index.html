@@ -16,6 +16,26 @@
     <title>vue-slider</title>
 </head>
 <body>
+
+    <div id="root">
+        <div class="container">
+            <div class="container-slider">
+                <button class="arrow">
+                    <i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>
+                </button>
+                <div class="slide">
+                    <img :src="img.urlImg" alt="">
+                    <div class="box-circle">
+                        <div class="circle" v-for="item in imgList"></div>
+                        
+                    </div>
+                </div>
+                <button @click="changeImg" class="arrow">
+                    <i class="fa fa-chevron-right fa-3x" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
     
     <script src="script.js"></script>
 </body>
