@@ -2,50 +2,118 @@ const vue = new Vue({
     el: "#root",
 
     data: {
-        imgIndex: 0,
+        imgActive: 0,
 
         imgList: [
             {
-                title: "inverno",
-                urlImg: "https://www.freeage.it/wp-content/uploads/2020/05/armocromia-inverno.jpg"
+                name: "snowboard",
+                url: "https://sportivoeinforma.it/wp-content/uploads/2020/06/Migliori-Snowboard.jpg",
+                pppp: ""
             },
             {
-                title: "primavera",
-                urlImg: "https://static2-viaggi.corriereobjects.it/wp-content/uploads/2021/03/iStock-1128908941.jpg?v=427355"
+                name: "bungee jumping",
+                url: "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/fx4uvbaocigcytijeerw/IbarakiRyujinBridgeBungeeJumpingExperiencefromTokyo.webp",
             },
             {
-                title: "estate",
-                urlImg: "https://studioidentity.net/wp-content/uploads/2017/07/6-curiosita%CC%80-sullestate_FB.jpg"
+                name: "bike",
+                url: "https://www.ilbuonsenso.net/wp-content/uploads/2017/06/Fabrizio-Dragoni-bike-trial.jpg",
             },
             {
-                title: "autunno",
-                urlImg: "https://www.occhionotizie.it/wp-content/uploads/2020/09/111354497-edcba630-d5e8-4517-9fe1-8c103e1f11e3.jpg"
+                name: "ski",
+                url: "https://www.airolo.ch/immaginiNews/new_coppa_europa_freestyle_moguls___aerials_20212_212_2_tmb.jpg"
+            },
+            {
+                name: "surf",
+                url: "https://actiotrainer.com/wp-content/uploads/2021/03/AdobeStock_217065264-scaled.jpg"
+            },
+            {
+                name: "motocross",
+                url: "https://www.raisport.rai.it/dl/img/2019/06/1600x900_1560676907816.paracadutismo.jpg"
+            },
+            {
+                name: "skateboard",
+                url: "https://cdn.hipwallpaper.com/i/81/52/lBqeGV.jpg",
+            },
+            {
+                name: "wingsuit",
+                url: "https://wallpapercave.com/wp/8yrv201.jpg",
             }
-        ]
+        ],
+
+        addedImg: {
+            name: "",
+            url: "",
+        },
+
+        stopAutoPlay: true,
+
+        showAddImg: false,
     },
 
     methods: {
+        backGroundColor: function (i) {
+            return (i == this.imgActive ? 'rgb(179, 176, 176)' : null)
+        },
 
         nextImg: function () {
-            this.imgIndex++;
+            if (this.imgActive < (this.imgList.length - 1)) {
+                this.imgActive++;
 
-            if (this.imgIndex == this.imgList.length) {
-                this.imgIndex = 0;
-            };
+            } else {
+                this.imgActive = 0;
+            }
         },
 
         previousImg: function () {
-            if (this.imgIndex > 0) {
-                this.imgIndex--;;
+            this.imgActive--;
+            if (this.imgActive < 0) {
+                this.imgActive = (this.imgList.length - 1);
+            }
+        },
+
+        thisImg: function (i) {
+            this.imgActive = i;
+        },
+
+        playedImg: function () {
+            this.stopAutoPlay = false;
+
+            var autoPlay = setInterval(() => {
+                if (!this.stopAutoPlay) {
+                    this.nextImg()
+                }
+
+            }, 1200);
+
+            if (this.stopAutoPlay) {
+                clearInterval(autoPlay)
             };
-
         },
 
-        jumpImg: function (index) {
-            console.log(index)
-            this.imgIndex = index
-            // index == imgList? 'true' : 'false';
+        stoppedImg: function () {
+            this.stopAutoPlay = true;
         },
+
+        addImg: function () {
+
+            if (this.addedImg.name === "") {
+                this.addedImg.name = "img_" + (this.imgList.length + 1);
+            }
+            if (this.addedImg.url !== "") {
+                let copyAddedImg = {
+                    name: this.addedImg.name,
+                    url: this.addedImg.url
+                }
+                this.imgList.push(copyAddedImg);
+            }
+            this.addedImg.name = "";
+            this.addedImg.url = "";
+        },
+
+        showButtonAdd: function () {
+            this.showAddImg = !this.showAddImg
+        }
+
     },
 
 });

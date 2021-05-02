@@ -1,48 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,500;1,900&display=swap"
+        rel="stylesheet">
 
-    <!-- Vue js -->
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- my css -->
     <link rel="stylesheet" href="style.css">
-    <title>vue-slider</title>
+    <title>slider</title>
 </head>
-<body>
 
+<body>
     <div id="root">
         <div class="container">
-            <div class="container-slider">
-
-                <button @click="previousImg" class="arrow">
-                    <i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>
-                </button>
-
-                <div class="slide">
-                    <img :src="imgList[imgIndex].urlImg" :alt="imgList[imgIndex].title">
-
-                    <h3>{{imgList[imgIndex].title}}</h3>
-
-                    <div class="box-circle">
-                        <div @click="jumpImg(index)" class="circle" v-for="(item, index) in imgList" :style="{backgroundColor: index == imgIndex ? 'white' : null}"></div>
+            <!-- aside -->
+            <div class="aside">
+                <h3>LE MIE FOTO:</h3>
+                <!-- lista foto -->
+                <ul>
+                    <li v-for="(item, index) in imgList" 
+                        :style="{'background-color': backGroundColor(index)}"
+                        @click="thisImg(index)">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                        <span>{{imgList[index].name.toUpperCase()}}</span>
+                    </li>
+                </ul>
+                <!-- form aggiungi foto -->
+                <form class="add" v-if="showAddImg">
+                    <input type="text" placeholder="Titolo della foto" v-model="addedImg.name">
+                    <input type="text" placeholder="Link della foto" v-model="addedImg.url">
+                    <!-- pulsante per inviare il form -->
+                    <button @click.prevent="addImg">Aggiungi</button>
+                    <!-- pulsante per chiuedere il form -->
+                    <div class="show close_add_form" @click="showButtonAdd">
+                        <i v-if="showAddImg" class="fa fa-times" aria-hidden="true"></i>
                     </div>
+                </form>
+                <!-- pulsante per far comparire il form -->
+                <div v-else class="open_add_form"  @click="showButtonAdd">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <span>Add photo</span>
                 </div>
 
-                <button @click="nextImg" class="arrow">
-                    <i class="fa fa-chevron-right fa-3x" aria-hidden="true"</i>
-                </button>
-
             </div>
+
+            <!-- slider -->
+            <div class="container-slide">
+                <img :src="imgList[imgActive].url" alt="">
+                <!-- player bar -->
+                <div class="player_bar">
+                    <div @click="previousImg">
+                        <i class="fa fa-arrow-left" aria-hidden="true" ></i>
+                    </div>
+                    <div>
+                        <i class="fa fa-play" aria-hidden="true" @click="playedImg"></i>
+                    </div>
+                    <div>
+                        <i class="fa fa-stop" aria-hidden="true" @click="stoppedImg"></i>
+
+                    </div>
+                    <div>
+                        <i class="fa fa-arrow-right" aria-hidden="true" @click="nextImg"></i>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
+
 </html>
