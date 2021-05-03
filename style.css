@@ -30,6 +30,11 @@ html {
     margin-bottom: 10px;
 }
 /* aside lista */
+.container-slide:active,
+.container-slide:focus {
+    outline: none;
+}
+
 .container .aside ul {
     overflow: auto;
     flex-grow: 1;

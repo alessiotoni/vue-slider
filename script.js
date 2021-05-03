@@ -115,4 +115,8 @@ const vue = new Vue({
         },
     },
 
+    mounted: function() {
+        document.querySelector(".container-slide").focus()
+    }
+
 });
