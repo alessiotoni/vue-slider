@@ -75,9 +75,21 @@ const vue = new Vue({
             this.imgActive = i;
         },
 
-        playedImg: function () {
+        playButton() {
             this.stopAutoPlay = false;
+            this.playedImg()
+        },
 
+        stopButton: function () {
+            this.stopAutoPlay = true;
+        },
+
+        stopPlaySpaceBar: function () {
+            this.stopAutoPlay = !this.stopAutoPlay;
+            this.playedImg()
+        },
+
+        playedImg: function () {
             var autoPlay = setInterval(() => {
                 if (!this.stopAutoPlay) {
                     this.nextImg()
@@ -88,10 +100,6 @@ const vue = new Vue({
                 };
             }, 1200);
 
-        },
-
-        stoppedImg: function () {
-            this.stopAutoPlay = true;
         },
 
         addImg: function () {
@@ -108,6 +116,7 @@ const vue = new Vue({
             }
             this.addedImg.name = "";
             this.addedImg.url = "";
+
         },
 
         showButtonAdd: function () {
@@ -115,8 +124,8 @@ const vue = new Vue({
         },
     },
 
-    mounted: function() {
+    mounted: function () {
         document.querySelector(".container-slide").focus()
-    }
+    },
 
 });

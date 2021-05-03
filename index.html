@@ -35,7 +35,7 @@
                     </li>
                 </ul>
                 <!-- form aggiungi foto -->
-                <form 
+                <div 
                 class="add" 
                 v-if="showAddImg">
                     <input 
@@ -56,7 +56,7 @@
                         v-if="showAddImg" 
                         class="fa fa-times" aria-hidden="true"></i>
                     </div>
-                </form>
+                </div>
                 <!-- pulsante per far comparire il form -->
                 <div 
                 v-else 
@@ -68,7 +68,7 @@
             </div>
 
             <!-- slider -->
-            <div class="container-slide" @keyup.left="previousImg" @keyup.right="nextImg" tabindex="-1">
+            <div class="container-slide" @keyup.left="previousImg" @keyup.right="nextImg" tabindex="-1" @keyup.space="stopPlaySpaceBar">
                 <img :src="imgList[imgActive].url" alt="">
                 <!-- player bar -->
                 <div class="player_bar">
@@ -76,10 +76,10 @@
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
                     </div>
                     <div>
-                        <i class="fa fa-play" aria-hidden="true" @click="playedImg"></i>
+                        <i class="fa fa-play" aria-hidden="true" @click="playButton"></i>
                     </div>
                     <div>
-                        <i class="fa fa-stop" aria-hidden="true" @click="stoppedImg"></i>
+                        <i class="fa fa-stop" aria-hidden="true" @click="stopButton"></i>
 
                     </div>
                     <div>
