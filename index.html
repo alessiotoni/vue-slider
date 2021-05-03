@@ -19,15 +19,16 @@
 </head>
 
 <body>
+
     <div id="root">
+
         <div class="container">
             <!-- aside -->
             <div class="aside">
                 <h3>LE MIE FOTO:</h3>
                 <!-- lista foto -->
                 <ul>
-                    <li v-for="(item, index) in imgList" 
-                        :style="{'background-color': backGroundColor(index)}"
+                    <li v-for="(item, index) in imgList" :style="{'background-color': backGroundColor(index)}"
                         @click="thisImg(index)">
                         <i class="fa fa-picture-o" aria-hidden="true"></i>
                         <span>{{imgList[index].name.toUpperCase()}}</span>
@@ -45,7 +46,7 @@
                     </div>
                 </form>
                 <!-- pulsante per far comparire il form -->
-                <div v-else class="open_add_form"  @click="showButtonAdd">
+                <div v-else class="open_add_form" @click="showButtonAdd">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     <span>Add photo</span>
                 </div>
@@ -58,7 +59,7 @@
                 <!-- player bar -->
                 <div class="player_bar">
                     <div @click="previousImg">
-                        <i class="fa fa-arrow-left" aria-hidden="true" ></i>
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
                     </div>
                     <div>
                         <i class="fa fa-play" aria-hidden="true" @click="playedImg"></i>

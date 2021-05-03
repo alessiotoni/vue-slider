@@ -83,11 +83,11 @@ const vue = new Vue({
                     this.nextImg()
                 }
 
+                if (this.stopAutoPlay) {
+                    clearInterval(autoPlay)
+                };
             }, 1200);
 
-            if (this.stopAutoPlay) {
-                clearInterval(autoPlay)
-            };
         },
 
         stoppedImg: function () {
@@ -112,8 +112,7 @@ const vue = new Vue({
 
         showButtonAdd: function () {
             this.showAddImg = !this.showAddImg
-        }
-
+        },
     },
 
 });
